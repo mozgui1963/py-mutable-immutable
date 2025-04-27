@@ -16,4 +16,22 @@ marks = {
 }
 collection_of_coins = {1, 2, 25}
 
-# write your code here
+
+def create_dictionary(*args) -> dict:
+    
+    
+    allowed_types = (int, float, str, bool, type(None), list, tuple, set, dict)
+    result = {}
+    for position, argument in enumerate(args):
+        if isinstance(argument, allowed_types) or callable(argument):
+            if isinstance(argument, (list, set, dict)):
+                # Lists, sets, and dicts are not hashable, can't be used as keys
+                print(f"Cannot add {argument} to the dict!")
+            else:
+                # Add the argument as a key and its position as the value
+                result[argument] = position
+        else:
+            # Not an allowed type or function
+            print(f"Cannot add {argument} to the dict!")
+
+    return result
